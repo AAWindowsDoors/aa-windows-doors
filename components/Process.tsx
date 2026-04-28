@@ -47,7 +47,7 @@ export default function Process() {
               Simple Process.<br />Zero Guesswork.
             </h2>
           </div>
-          <a href="#contact"
+          <a href="/contact"
             className="shrink-0 self-start lg:self-auto bg-yellow-400 hover:bg-yellow-500 text-black font-outfit font-semibold text-sm px-6 py-3 rounded-full transition-all duration-300 hover:-translate-y-[1px] active:scale-[0.98] shadow-[0_6px_16px_rgba(234,179,8,0.35)]">
             Schedule Free Estimate
           </a>

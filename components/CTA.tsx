@@ -31,7 +31,7 @@ export default function CTA() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <a href="#contact"
+              <a href="/contact"
                 className="group flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-black font-outfit font-semibold text-sm px-6 py-4 rounded-full transition-all duration-300 hover:-translate-y-[2px] active:scale-[0.98] shadow-[0_8px_28px_rgba(234,179,8,0.35)]">
                 Get Free Estimate
                 <ArrowRight size={16} weight="bold" className="transition-transform group-hover:translate-x-1" />

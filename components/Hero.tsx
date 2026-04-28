@@ -75,7 +75,7 @@ export default function Hero() {
             custom={3} variants={fadeUp} initial="hidden" animate="visible"
             className="flex flex-wrap gap-4"
           >
-            <a href="#contact"
+            <a href="/contact"
               className="group flex items-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black font-outfit font-semibold text-sm px-6 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-[2px] active:scale-[0.98] shadow-[0_8px_24px_rgba(234,179,8,0.45)]">
               Get Free Estimate
               <ArrowRight size={16} weight="bold" className="transition-transform duration-300 group-hover:translate-x-1" />
