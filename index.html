@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AA Windows & Doors — Installs & Repairs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'aa-black': '#111110',
+          'aa-white': '#F8F7F4',
+          'aa-stone': '#78716C',
+          'aa-border': '#E7E5E4',
+        },
+        fontFamily: {
+          outfit: ['Outfit', 'sans-serif'],
+          sans: ['"DM Sans"', 'sans-serif'],
+        },
+      },
+    },
+  }
+</script>
+<style>
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  * { box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+  ::selection { background: #B45309; color: #F8F7F4; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #F8F7F4; }
+  ::-webkit-scrollbar-thumb { background: #D6D3D1; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #B45309; }
+
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .marquee-track { animation: marquee 30s linear infinite; white-space: nowrap; display: inline-flex; }
+
+  @keyframes pulse-dot { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+  .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+  .fade-up { opacity:0; transform:translateY(28px); transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1), transform 0.65s cubic-bezier(0.16,1,0.3,1); }
+  .fade-up.visible { opacity:1; transform:translateY(0); }
+  .d1 { transition-delay:0.1s; } .d2 { transition-delay:0.2s; } .d3 { transition-delay:0.3s; } .d4 { transition-delay:0.4s; }
+
+  .img-zoom img { transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+  .img-zoom:hover img { transform: scale(1.05); }
+
+  .project-card .ov { transition: opacity 0.45s ease; opacity:0.35; }
+  .project-card:hover .ov { opacity:0.85; }
+  .project-card .pc { transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); transform:translateY(6px); }
+  .project-card:hover .pc { transform:translateY(0); }
+
+  .faq-body { max-height:0; overflow:hidden; transition: max-height 0.35s cubic-bezier(0.16,1,0.3,1); }
+  .faq-body.open { max-height:240px; }
+  .faq-icon-plus { display:block; } .faq-icon-minus { display:none; }
+  .faq-open .faq-icon-plus { display:none; } .faq-open .faq-icon-minus { display:block; }
+  .faq-open .faq-q { color: #B45309; }
+
+  .nav-scrolled { background: rgba(248,247,244,0.96); backdrop-filter:blur(12px); border-bottom: 1px solid #E7E5E4; box-shadow: 0 1px 20px rgba(17,17,16,0.04); }
+
+  .mobile-menu { display:none; }
+  .mobile-menu.open { display:block; }
+
+  .btn-amber { background:#B45309; color:#fff; transition: background 0.25s, transform 0.2s, box-shadow 0.25s; box-shadow: 0 6px 20px rgba(180,83,9,0.28); }
+  .btn-amber:hover { background:#92400E; transform:translateY(-2px); box-shadow: 0 10px 28px rgba(180,83,9,0.35); }
+  .btn-amber:active { transform:scale(0.98); }
+  .btn-outline { border:1px solid #E7E5E4; background:#fff; transition: border-color 0.2s, transform 0.2s; }
+  .btn-outline:hover { border-color:#A8A29E; transform:translateY(-1px); }
+  .btn-outline:active { transform:scale(0.98); }
+  .btn-dark { background:#111110; color:#F8F7F4; transition: background 0.25s, transform 0.2s; }
+  .btn-dark:hover { background:#292928; transform:translateY(-1px); }
+
+  .service-row { display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:center; }
+  @media(min-width:1024px) { .service-row { grid-template-columns:1fr 1fr; gap:4rem; } .service-row.flip { direction:rtl; } .service-row.flip > * { direction:ltr; } }
+
+  .projects-grid { display:grid; gap:1rem; grid-template-columns:1fr; }
+  @media(min-width:640px) { .projects-grid { grid-template-columns:1fr 1fr; } }
+  @media(min-width:1024px) { .projects-grid { grid-template-columns:2fr 1fr; grid-template-rows:260px 260px; } .proj-tall { grid-row: span 2; } .proj-wide { grid-column: span 2; } }
+
+  .testimonials-scroll { display:flex; gap:1.25rem; overflow-x:auto; padding-bottom:1rem; scroll-snap-type:x mandatory; -ms-overflow-style:none; scrollbar-width:none; }
+  .testimonials-scroll::-webkit-scrollbar { display:none; }
+  .t-card { flex-shrink:0; scroll-snap-align:start; width:min(85vw, 400px); }
+
+  .process-connector { display:none; }
+  @media(min-width:1024px) { .process-connector { display:block; } .process-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; position:relative; } }
+
+  .hero-grid { display:grid; grid-template-columns:1fr; gap:3rem; align-items:center; }
+  @media(min-width:1024px) { .hero-grid { grid-template-columns:55% 45%; gap:2rem; } }
+
+  .hero-img-wrap { display:none; }
+  @media(min-width:1024px) { .hero-img-wrap { display:block; } }
+
+  .trust-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; }
+  @media(min-width:640px) { .trust-grid { grid-template-columns:repeat(4,1fr); } }
+
+  .cta-grid { display:grid; grid-template-columns:1fr; gap:3rem; align-items:center; }
+  @media(min-width:1024px) { .cta-grid { grid-template-columns:60% 40%; } }
+
+  .footer-grid { display:grid; grid-template-columns:1fr; gap:2.5rem; }
+  @media(min-width:768px) { .footer-grid { grid-template-columns:1fr 1fr; } }
+  @media(min-width:1024px) { .footer-grid { grid-template-columns:1.5fr 1fr 1fr 1.2fr; } }
+
+  .faq-grid { display:grid; grid-template-columns:1fr; gap:4rem; }
+  @media(min-width:1024px) { .faq-grid { grid-template-columns:40% 1fr; gap:6rem; } }
+
+  .stats-grid { display:grid; grid-template-columns:1fr 1fr; }
+  @media(min-width:1024px) { .stats-grid { grid-template-columns:repeat(4,1fr); } }
+</style>
+</head>
+<body class="bg-[#F8F7F4] text-[#111110]">
+
+<!-- NAV -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-500">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-5 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-3">
+      <div class="w-9 h-9 bg-amber-700 flex items-center justify-center rounded-[6px]">
+        <span class="font-outfit font-bold text-white text-sm tracking-tight">AA</span>
+      </div>
+      <div class="hidden sm:block">
+        <p class="font-outfit font-semibold text-[13px] text-[#111110] leading-none">AA Windows & Doors</p>
+        <p class="text-[11px] text-[#78716C] leading-none mt-[3px]">Installs & Repairs</p>
+      </div>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#services" class="text-sm text-[#78716C] hover:text-[#111110] transition-colors">Services</a>
+      <a href="#projects" class="text-sm text-[#78716C] hover:text-[#111110] transition-colors">Projects</a>
+      <a href="#process" class="text-sm text-[#78716C] hover:text-[#111110] transition-colors">Process</a>
+      <a href="#faq" class="text-sm text-[#78716C] hover:text-[#111110] transition-colors">Contact</a>
+    </div>
+    <div class="hidden md:flex items-center gap-5">
+      <a href="tel:+13128471928" class="flex items-center gap-1.5 text-sm text-[#78716C] hover:text-[#111110] transition-colors">
+        <i class="ph ph-phone-call" style="font-size:14px;"></i>+1 (312) 847-1928
+      </a>
+      <a href="#faq" class="btn-amber font-outfit font-semibold text-sm px-5 py-2.5 rounded-full">Free Estimate</a>
+    </div>
+    <button id="menu-toggle" class="md:hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-stone-100 transition-colors" aria-label="Menu">
+      <i class="ph ph-list text-xl" id="menu-icon-open"></i>
+      <i class="ph ph-x text-xl hidden" id="menu-icon-close"></i>
+    </button>
+  </div>
+  <div id="mobile-menu" class="mobile-menu md:hidden bg-[#F8F7F4]/98 border-t border-[#E7E5E4]">
+    <div class="px-6 py-6 flex flex-col gap-5">
+      <a href="#services" class="text-base text-[#111110]" onclick="closeMobileMenu()">Services</a>
+      <a href="#projects" class="text-base text-[#111110]" onclick="closeMobileMenu()">Projects</a>
+      <a href="#process" class="text-base text-[#111110]" onclick="closeMobileMenu()">Process</a>
+      <a href="#faq" class="text-base text-[#111110]" onclick="closeMobileMenu()">Contact</a>
+      <div class="pt-2 border-t border-[#E7E5E4] flex flex-col gap-3">
+        <a href="tel:+13128471928" class="flex items-center gap-2 text-sm text-[#78716C]">
+          <i class="ph ph-phone-call"></i>+1 (312) 847-1928
+        </a>
+        <a href="#faq" class="btn-amber font-outfit font-semibold text-sm px-5 py-3 rounded-full text-center" onclick="closeMobileMenu()">Get Free Estimate</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative min-h-[100dvh] flex items-center bg-[#F8F7F4] pt-20 pb-16">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+    <div class="hero-grid">
+
+      <!-- Left -->
+      <div class="flex flex-col">
+        <div class="fade-up inline-flex items-center gap-2 w-fit bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-full mb-8">
+          <span class="pulse-dot w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+          <span class="font-outfit text-xs font-semibold text-amber-800 tracking-wide uppercase">Chicago's Trusted Installers</span>
+        </div>
+        <h1 class="fade-up d1 font-outfit font-extrabold text-5xl md:text-7xl lg:text-[80px] leading-[1.0] tracking-tight text-[#111110] mb-6">
+          Precision<br><span class="text-amber-700">Installs.</span><br>Every Frame.
+        </h1>
+        <p class="fade-up d2 text-base md:text-lg text-[#78716C] leading-relaxed max-w-[52ch] mb-10">
+          AA Windows & Doors brings 20+ years of hands-on expertise to every installation and repair — measured twice, installed right, guaranteed to last.
+        </p>
+        <div class="fade-up d3 flex flex-wrap gap-4 mb-12">
+          <a href="#faq" class="btn-amber group flex items-center gap-2 font-outfit font-semibold text-sm px-6 py-3.5 rounded-full">
+            Get Free Estimate <i class="ph ph-arrow-right"></i>
+          </a>
+          <a href="#projects" class="btn-outline flex items-center gap-2 font-outfit font-semibold text-sm px-6 py-3.5 rounded-full text-[#111110]">
+            View Our Work
+          </a>
+        </div>
+        <div class="fade-up d4 trust-grid">
+          <div class="flex items-center gap-2 bg-white border border-[#E7E5E4] px-3 py-2.5 rounded-xl" style="box-shadow:0 2px 8px rgba(17,17,16,0.04)">
+            <i class="ph ph-shield-check text-amber-700" style="font-size:15px;flex-shrink:0"></i>
+            <span class="text-xs text-[#78716C] leading-tight">Licensed & Insured</span>
+          </div>
+          <div class="flex items-center gap-2 bg-white border border-[#E7E5E4] px-3 py-2.5 rounded-xl" style="box-shadow:0 2px 8px rgba(17,17,16,0.04)">
+            <i class="ph ph-star text-amber-700" style="font-size:15px;flex-shrink:0"></i>
+            <span class="text-xs text-[#78716C] leading-tight">4.9-Star Rated</span>
+          </div>
+          <div class="flex items-center gap-2 bg-white border border-[#E7E5E4] px-3 py-2.5 rounded-xl" style="box-shadow:0 2px 8px rgba(17,17,16,0.04)">
+            <i class="ph ph-clock text-amber-700" style="font-size:15px;flex-shrink:0"></i>
+            <span class="text-xs text-[#78716C] leading-tight">Same-Day Service</span>
+          </div>
+          <div class="flex items-center gap-2 bg-white border border-[#E7E5E4] px-3 py-2.5 rounded-xl" style="box-shadow:0 2px 8px rgba(17,17,16,0.04)">
+            <i class="ph ph-certificate text-amber-700" style="font-size:15px;flex-shrink:0"></i>
+            <span class="text-xs text-[#78716C] leading-tight">20+ Years Experience</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right -->
+      <div class="hero-img-wrap relative">
+        <div class="img-zoom relative rounded-[28px] overflow-hidden" style="aspect-ratio:4/5;box-shadow:0 32px 64px -20px rgba(17,17,16,0.18);">
+          <img src="https://picsum.photos/seed/windowframe1/900/1100" alt="Professional window installation" class="w-full h-full object-cover" />
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(17,17,16,0.2),transparent)"></div>
+        </div>
+        <!-- Floating stat -->
+        <div class="absolute -left-10 bottom-12 bg-white/90 border border-white/60 px-5 py-4 rounded-2xl" style="backdrop-filter:blur(12px);box-shadow:0 16px 32px rgba(17,17,16,0.12),inset 0 1px 0 rgba(255,255,255,0.8);">
+          <p class="font-outfit font-extrabold text-2xl text-[#111110] leading-none">3,412</p>
+          <p class="text-xs text-[#78716C] mt-1">Installs completed</p>
+          <div class="mt-2.5 flex gap-0.5">
+            <i class="ph ph-star-fill text-amber-500" style="font-size:11px;"></i>
+            <i class="ph ph-star-fill text-amber-500" style="font-size:11px;"></i>
+            <i class="ph ph-star-fill text-amber-500" style="font-size:11px;"></i>
+            <i class="ph ph-star-fill text-amber-500" style="font-size:11px;"></i>
+            <i class="ph ph-star-fill text-amber-500" style="font-size:11px;"></i>
+          </div>
+        </div>
+        <!-- Years badge -->
+        <div class="absolute -right-4 top-8 bg-amber-700 px-4 py-3 rounded-xl" style="box-shadow:0 8px 24px rgba(180,83,9,0.3);">
+          <p class="font-outfit font-bold text-white text-lg leading-none">20+</p>
+          <p class="text-amber-200 text-xs mt-0.5">Years trusted</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="bg-amber-700 py-3.5 overflow-hidden">
+  <div class="marquee-track">
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Window Installation</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Door Installation</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Glass Replacement</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Seal & Draft Repair</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Custom Sizing</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Same-Day Emergency</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Entry Doors</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Patio & French Doors</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Storm Windows</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Sliding Doors</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <!-- duplicate for seamless loop -->
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Window Installation</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Door Installation</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Glass Replacement</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Seal & Draft Repair</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Custom Sizing</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Same-Day Emergency</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Entry Doors</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Patio & French Doors</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Storm Windows</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+    <span class="inline-flex items-center gap-4 px-2"><span class="font-outfit font-semibold text-sm text-amber-100 uppercase tracking-wider">Sliding Doors</span><span class="text-amber-500 text-xs">&#9679;</span></span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="py-24 lg:py-32 bg-[#F8F7F4]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="fade-up mb-20">
+      <p class="font-outfit text-xs font-semibold text-amber-700 uppercase tracking-widest mb-3">What We Do</p>
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+        <h2 class="font-outfit font-extrabold text-4xl md:text-5xl tracking-tight text-[#111110] max-w-xl leading-tight">Full-Service Window & Door Specialists</h2>
+        <p class="text-base text-[#78716C] leading-relaxed max-w-[44ch] lg:text-right">From first measure to final walkthrough — no subcontractors, no shortcuts.</p>
+      </div>
+    </div>
+    <div class="flex flex-col gap-20 lg:gap-28">
+
+      <!-- Service 1 -->
+      <div class="service-row fade-up">
+        <div class="img-zoom relative rounded-[20px] overflow-hidden" style="aspect-ratio:4/3;box-shadow:0 20px 40px -12px rgba(17,17,16,0.12);">
+          <img src="https://picsum.photos/seed/wininstall01/720/540" alt="Window Installation" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-outfit text-xs font-semibold text-amber-700 uppercase tracking-widest mb-4">01</span>
+          <h3 class="font-outfit font-bold text-3xl md:text-4xl tracking-tight text-[#111110] mb-5 leading-tight">Window Installation</h3>
+          <p class="text-base text-[#78716C] leading-relaxed max-w-[50ch] mb-6">New construction or replacement — we handle every window type. Double-hung, casement, bay, picture, and custom. Properly sealed, perfectly plumb.</p>
+          <div class="border-t border-[#E7E5E4] pt-5 mb-8"><p class="text-sm text-[#78716C]">Energy-efficient glass · All window styles · Manufacturer warranty backed</p></div>
+          <a href="#faq" class="inline-flex items-center gap-2 font-outfit font-semibold text-sm text-amber-700 hover:text-amber-800 transition-colors w-fit">Get a quote <i class="ph ph-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="service-row flip fade-up">
+        <div class="img-zoom relative rounded-[20px] overflow-hidden" style="aspect-ratio:4/3;box-shadow:0 20px 40px -12px rgba(17,17,16,0.12);">
+          <img src="https://picsum.photos/seed/doorinstall02/720/540" alt="Door Installation" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-outfit text-xs font-semibold text-amber-700 uppercase tracking-widest mb-4">02</span>
+          <h3 class="font-outfit font-bold text-3xl md:text-4xl tracking-tight text-[#111110] mb-5 leading-tight">Door Installation</h3>
+          <p class="text-base text-[#78716C] leading-relaxed max-w-[50ch] mb-6">Entry doors, patio sliders, French doors, storm doors. Installed with precision alignment so every door opens, closes, and locks the way it should.</p>
+          <div class="border-t border-[#E7E5E4] pt-5 mb-8"><p class="text-sm text-[#78716C]">Pre-hung & slab · Fiberglass, steel & wood · Weather-tight guaranteed</p></div>
+          <a href="#faq" class="inline-flex items-center gap-2 font-outfit font-semibold text-sm text-amber-700 hover:text-amber-800 transition-colors w-fit">Get a quote <i class="ph ph-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="service-row fade-up">
+        <div class="img-zoom relative rounded-[20px] overflow-hidden" style="aspect-ratio:4/3;box-shadow:0 20px 40px -12px rgba(17,17,16,0.12);">
+          <img src="https://picsum.photos/seed/winrepair03/720/540" alt="Window Repair" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-outfit text-xs font-semibold text-amber-700 uppercase tracking-widest mb-4">03</span>
+          <h3 class="font-outfit font-bold text-3xl md:text-4xl tracking-tight text-[#111110] mb-5 leading-tight">Window & Door Repairs</h3>
+          <p class="text-base text-[#78716C] leading-relaxed max-w-[50ch] mb-6">Foggy glass, broken seals, hardware failures, drafts, sticking frames — we diagnose and fix what others replace. Fast, affordable, and lasting.</p>
+          <div class="border-t border-[#E7E5E4] pt-5 mb-8"><p class="text-sm text-[#78716C]">Glass repair & replacement · Hardware & locks · Draft elimination</p></div>
+          <a href="#faq" class="inline-flex items-center gap-2 font-outfit font-semibold text-sm text-amber-700 hover:text-amber-800 transition-colors w-fit">Get a quote <i class="ph ph-arrow-up-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="service-row flip fade-up">
+        <div class="img-zoom relative rounded-[20px] overflow-hidden" style="aspect-ratio:4/3;box-shadow:0 20px 40px -12px rgba(17,17,16,0.12);">
+          <img src="https://picsum.photos/seed/emergency04/720/540" alt="Emergency Service" class="w-full h-full object-cover" />
+        </div>
+        <div class="flex flex-col">
+          <span class="font-outfit text-xs font-semibold text-amber-700 uppercase tracking-widest mb-4">04</span>
+          <h3 class="font-outfit font-bold text-3xl md:text-4xl tracking-tight text-[#111110] mb-5 leading-tight">Emergency & Same-Day</h3>
+          <p class="text-base text-[#78716C] leading-relaxed max-w-[50ch] mb-6">Broken glass, failed locks, storm damage. We offer rapid-response service to secure your home quickly — professionally, cleanly, the same day.</p>
+          <div class="border-t border-[#E7E5E4] pt-5 mb-8"><p class="text-sm text-[#78716C]">Average response under 4 hours · Board-up & secure · Insurance-ready docs</p></div>
+          <a href="#faq" class="inline-flex items-center gap-2 font-outfit font-semibold text-sm text-amber-700 hover:text-amber-800 transition-colors w-fit">Get a quote <i class="ph ph-arrow-up-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="bg-[#111110] py-20">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="stats-grid divide-x divide-stone-800">
+      <div class="fade-up px-8 py-10 first:pl-0 flex flex-col">
+        <span class="font-outfit font-extrabold text-4xl md:text-5xl text-[#F8F7F4] tracking-tight leading-none">20+</span>
+        <span class="font-outfit font-semibold text-sm text-amber-600 mt-3 mb-1">Years in business</span>
+        <span class="text-xs text-stone-500">Family-owned since 2004</span>
+      </div>
+      <div class="fade-up d1 px-8 py-10 flex flex-col">
+        <span class="font-outfit font-extrabold text-4xl md:text-5xl text-[#F8F7F4] tracking-tight leading-none">3,412</span>
+        <span class="font-outfit font-semibold text-sm text-amber-600 mt-3 mb-1">Installs completed</span>
+        <span class="text-xs text-stone-500">Across Chicagoland</span>
+      </div>
+      <div class="fade-up d2 px-8 py-10 flex flex-col">
+        <span class="font-outfit font-extrabold text-4xl md:text-5xl text-[#F8F7F4] tracking-tight leading-none">4.9</span>
+        <span class="font-outfit font-semibold text-sm text-amber-600 mt-3 mb-1">Average star rating</span>
+        <span class="text-xs text-stone-500">From 847 verified reviews</span>
+      </div>
+      <div class="fade-up d3 px-8 py-10 flex flex-col">
+        <span class="font-outfit font-extrabold text-4xl md:text-5xl text-[#F8F7F4] tracking-tight leading-none">&lt;4hr</span>
+        <span class="font-outfit font-semibold text-sm text-amber-600 mt-3 mb-1">Emergency response</span>
+        <span class="text-xs text-stone-500">Same-day availability</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="py-24 lg:py-32 bg-stone-50">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="fade-up flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
+      <div>
+        <p class="font-outfit text-xs font-semibold text-amber-700 uppercase tracking-widest mb-3">Recent Installs</p>
+        <h2 class="font-outfit font-extrabold text-4xl md:text-5xl tracking-tight text-[#111110] leading-tight">Work We Stand Behind</h2>
+      </div>
+      <a href="#faq" class="inline-flex items-center gap-2 font-outfit font-semibold text-sm text-amber-700 hover:text-amber-800 transition-colors shrink-0">Start your project <i class="ph ph-arrow-up-right"></i></a>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card img-zoom relative rounded-2xl overflow-hidden cursor-pointer proj-tall" style="min-height:260px;">
+        <img src="https://picsum.photos/seed/project_lp01/900/700" alt="Lincoln Park Brownstone" class="w-full h-full object-cover absolute inset-0" />
+        <div class="ov absolute inset-0" style="background:linear-gradient(to top,#111110,rgba(17,17,16,0.3),transparent);"></div>
+        <div class="pc absolute bottom-0 left-0 right-0 p-5">
+          <p class="text-xs text-amber-400 mb-1">Full Window Replacement · 14 units</p>
+          <h3 class="font-outfit font-bold text-lg text-white leading-tight">Lincoln Park Brownstone</h3>
+        </div>
+      </div>
+      <div class="project-card img-zoom relative rounded-2xl overflow-hidden cursor-pointer" style="min-height:180px;">
+        <img src="https://picsum.photos/seed/project_wp02/700/500" alt="Wicker Park Rehab" class="w-full h-full object-cover absolute inset-0" />
+        <div class="ov absolute inset-0" style="background:linear-gradient(to top,#111110,rgba(17,17,16,0.3),transparent);"></div>
+        <div class="pc absolute bottom-0 left-0 right-0 p-5">
+          <p class="text-xs text-amber-400 mb-1">Entry Door + Sidelights</p>
+          <h3 class="font-outfit font-bold text-lg text-white leading-tight">Wicker Park Rehab</h3>
+        </div>
+      </div>
+      <div class="project-card img-zoom relative rounded-2xl overflow-hidden cursor-pointer" style="min-height:180px;">
+        <img src="https://picsum.photos/seed/project_ev03/700/500" alt="Evanston Colonial" class="w-full h-full object-cover absolute inset-0" />
+        <div class="ov absolute inset-0" style="background:linear-gradient(to top,#111110,rgba(17,17,16,0.3),transparent);"></div>
+        <div class="pc absolute bottom-0 left-0 right-0 p-5">
+          <p class="text-xs text-amber-400 mb-1">Bay Windows · Custom Sizing</p>
+          <h3 class="font-outfit font-bold text-lg text-white leading-tight">Evanston Colonial</h3>
+        </div>
+      </div>
+      <div class="project-card img-zoom relative rounded-2xl overflow-hidden cursor-pointer proj-wide" style="min-height:200px;">
+        <img src="https://picsum.photos/seed/project_rn04/1200/500" alt="River North High-Rise" class="w-full h-full object-cover absolute inset-0" />
+        <div class="ov absolute inset-0" style="background:linear-gradient(to top,#111110,rgba(17,17,16,0.3),transparent);"></div>
+        <div class="pc absolute bottom-0 left-0 right-0 p-5">
+          <p class="text-xs text-amber-400 mb-1">Patio Doors · 3 Units</p>
+          <h3 class="font-outfit font-bold text-lg text-white leading-tight">River North High-Rise</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="py-24 lg:py-32 bg-[#F8F7F4]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="fade-up mb-20 max-w-2xl">
+      <p class="font-outfit text-xs font-semibold text-amber-700 uppercase tracking-widest mb-3">How It Works</p>
+      <h2 class="font-outfit font-extrabold text-4xl md:text-5xl tracking-tight text-[#111110] leading-tight">Simple Process.<br>Zero Guesswork.</h2>
+    </div>
+    <div class="process-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 relative">
+      <!-- connector -->
+      <div class="process-connector absolute top-[26px] left-[calc(12.5%+16px)] right-[calc(12.5%+16px)] h-px bg-[#E7E5E4]"></div>
+      <div class="fade-up relative z-10 flex flex-col">
+        <div class="w-[52px] h-[52px] rounded-full bg-[#F8F7F4] border-2 border-[#E7E5E4] flex items-center justify-center mb-6" style="box-shadow:0 4px 16px rgba(17,17,16,0.06);">
+          <i class="ph ph-magnifying-glass text-amber-700" style="font-size:22px;"></i>
+        </div>
+        <span class="font-outfit font-extrabold text-xs text-stone-300 tracking-widest mb-2">01</span>
+        <h3 class="font-outfit font-bold text-xl text-[#111110] mb-3 leading-tight">Free Estimate</h3>
+        <p class="text-sm text-[#78716C] leading-relaxed">We visit your home, assess the scope, and give you a clear, itemized quote — no pressure, no surprises.</p>
+      </div>
+      <div class="fade-up d1 relative z-10 flex flex-col">
+        <div class="w-[52px] h-[52px] rounded-full bg-[#F8F7F4] border-2 border-[#E7E5E4] flex items-center justify-center mb-6" style="box-shadow:0 4px 16px rgba(17,17,16,0.06);">
+          <i class="ph ph-ruler text-amber-700" style="font-size:22px;"></i>
+        </div>
+        <span class="font-outfit font-extrabold text-xs text-stone-300 tracking-widest mb-2">02</span>
+        <h3 class="font-outfit font-bold text-xl text-[#111110] mb-3 leading-tight">Precise Measurement</h3>
+        <p class="text-sm text-[#78716C] leading-relaxed">Every opening is measured twice. We account for structure, plumb, and weather exposure before ordering.</p>
+      </div>
+      <div class="fade-up d2 relative z-10 flex flex-col">
+        <div class="w-[52px] h-[52px] rounded-full bg-[#F8F7F4] border-2 border-[#E7E5E4] flex items-center justify-center mb-6" style="box-shadow:0 4px 16px rgba(17,17,16,0.06);">
+          <i class="ph ph-wrench text-amber-700" style="font-size:22px;"></i>
+        </div>
+        <span class="font-outfit font-extrabold text-xs text-stone-300 tracking-widest mb-2">03</span>
+        <h3 class="font-outfit font-bold text-xl text-[#111110] mb-3 leading-tight">Expert Installation</h3>
+        <p class="text-sm text-[#78716C] leading-relaxed">Our installers arrive on time, protect your space, and execute the job cleanly — typically in a single day.</p>
+      </div>
+      <div class="fade-up d3 relative z-10 flex flex-col">
+        <div class="w-[52px] h-[52px] rounded-full bg-[#F8F7F4] border-2 border-[#E7E5E4] flex items-center justify-center mb-6" style="box-shadow:0 4px 16px rgba(17,17,16,0.06);">
+          <i class="ph ph-check-circle text-amber-700" style="font-size:22px;"></i>
+        </div>
+        <span class="font-outfit font-extrabold text-xs text-stone-300 tracking-widest mb-2">04</span>
+        <h3 class="font-outfit font-bold text-xl text-[#111110] mb-3 leading-tight">Final Walkthrough</h3>
+        <p class="text-sm text-[#78716C] leading-relaxed">We inspect every seal, latch, and lock with you before we leave. You don't sign off until you're fully satisfied.</p>
+      </div>
+    </div>
+    <div class="fade-up mt-16 border-t border-[#E7E5E4] pt-10 flex flex-col sm:flex-row items-center justify-between gap-5">
+      <p class="text-base text-[#78716C] max-w-[48ch] text-center sm:text-left">Most installs complete in a single visit. Larger projects are scheduled in clear phases — always communicated upfront.</p>
+      <a href="#faq" class="shrink-0 btn-amber font-outfit font-semibold text-sm px-6 py-3 rounded-full">Schedule Estimate</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="py-24 lg:py-32 bg-stone-50 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="fade-up flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+      <div>
+        <p class="font-outfit text-xs font-semibold text-amber-700 uppercase tracking-widest mb-3">Client Reviews</p>
+        <h2 class="font-outfit font-extrabold text-4xl md:text-5xl tracking-tight text-[#111110] leading-tight">Heard From the People We Serve</h2>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <i class="ph ph-star-fill text-amber-500" style="font-size:18px;"></i>
+        <i class="ph ph-star-fill text-amber-500" style="font-size:18px;"></i>
+        <i class="ph ph-star-fill text-amber-500" style="font-size:18px;"></i>
+        <i class="ph ph-star-fill text-amber-500" style="font-size:18px;"></i>
+        <i class="ph ph-star-fill text-amber-500" style="font-size:18px;"></i>
+        <span class="font-outfit font-bold text-sm text-[#111110] ml-1">4.9</span>
+        <span class="text-xs text-[#78716C]">/ 847 reviews</span>
+      </div>
+    </div>
+    <div class="testimonials-scroll -mx-6 px-6 lg:-mx-8 lg:px-8">
+      <div class="t-card bg-white border border-[#E7E5E4] rounded-2xl p-7 flex flex-col" style="box-shadow:0 4px 20px rgba(17,17,16,0.05);">
+        <div class="flex gap-0.5 mb-5"><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i></div>
+        <p class="text-sm text-[#111110] leading-relaxed flex-1 mb-6">"Replaced 11 windows in our 1920s brick two-flat. They matched the original profile exactly and finished in one day. Every single sill is level. Genuinely impressed."</p>
+        <div class="border-t border-[#E7E5E4] pt-4 flex items-center justify-between">
+          <div><p class="font-outfit font-semibold text-sm text-[#111110]">Dominic Ferrera</p><p class="text-xs text-[#78716C]">Lincoln Park, Chicago</p></div>
+          <span class="text-xs text-stone-400">March 2026</span>
+        </div>
+      </div>
+      <div class="t-card bg-white border border-[#E7E5E4] rounded-2xl p-7 flex flex-col" style="box-shadow:0 4px 20px rgba(17,17,16,0.05);">
+        <div class="flex gap-0.5 mb-5"><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i></div>
+        <p class="text-sm text-[#111110] leading-relaxed flex-1 mb-6">"Had three contractors ghost us before AA even showed up on time. They installed our new entry door in 4 hours — threshold, weatherstrip, the works. Looks like it came with the house."</p>
+        <div class="border-t border-[#E7E5E4] pt-4 flex items-center justify-between">
+          <div><p class="font-outfit font-semibold text-sm text-[#111110]">Priya Raghunathan</p><p class="text-xs text-[#78716C]">Evanston, IL</p></div>
+          <span class="text-xs text-stone-400">January 2026</span>
+        </div>
+      </div>
+      <div class="t-card bg-white border border-[#E7E5E4] rounded-2xl p-7 flex flex-col" style="box-shadow:0 4px 20px rgba(17,17,16,0.05);">
+        <div class="flex gap-0.5 mb-5"><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i></div>
+        <p class="text-sm text-[#111110] leading-relaxed flex-1 mb-6">"Called at 8am about a broken patio door after a break-in. They had a temp secure by noon and a full replacement done by 3pm. The new door actually locks properly."</p>
+        <div class="border-t border-[#E7E5E4] pt-4 flex items-center justify-between">
+          <div><p class="font-outfit font-semibold text-sm text-[#111110]">Marcus Holt</p><p class="text-xs text-[#78716C]">Wicker Park, Chicago</p></div>
+          <span class="text-xs text-stone-400">February 2026</span>
+        </div>
+      </div>
+      <div class="t-card bg-white border border-[#E7E5E4] rounded-2xl p-7 flex flex-col" style="box-shadow:0 4px 20px rgba(17,17,16,0.05);">
+        <div class="flex gap-0.5 mb-5"><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i></div>
+        <p class="text-sm text-[#111110] leading-relaxed flex-1 mb-6">"Not the cheapest quote I got, but the only one who actually explained what the job entailed. Six months later: zero drafts, zero condensation. Worth every dollar."</p>
+        <div class="border-t border-[#E7E5E4] pt-4 flex items-center justify-between">
+          <div><p class="font-outfit font-semibold text-sm text-[#111110]">Cecelia Varga</p><p class="text-xs text-[#78716C]">Oak Park, IL</p></div>
+          <span class="text-xs text-stone-400">November 2025</span>
+        </div>
+      </div>
+      <div class="t-card bg-white border border-[#E7E5E4] rounded-2xl p-7 flex flex-col" style="box-shadow:0 4px 20px rgba(17,17,16,0.05);">
+        <div class="flex gap-0.5 mb-5"><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i><i class="ph ph-star-fill text-amber-500" style="font-size:14px;"></i></div>
+        <p class="text-sm text-[#111110] leading-relaxed flex-1 mb-6">"Reframed a warped door that three other companies said needed full replacement. Saved us $1,800. Team was clean, professional, and done in 90 minutes flat."</p>
+        <div class="border-t border-[#E7E5E4] pt-4 flex items-center justify-between">
+          <div><p class="font-outfit font-semibold text-sm text-[#111110]">James Okafor</p><p class="text-xs text-[#78716C]">Andersonville, Chicago</p></div>
+          <span class="text-xs text-stone-400">December 2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="py-24 lg:py-32 bg-[#F8F7F4]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="faq-grid">
+      <div class="fade-up">
+        <p class="font-outfit text-xs font-semibold text-amber-700 uppercase tracking-widest mb-3">FAQ</p>
+        <h2 class="font-outfit font-extrabold text-4xl md:text-5xl tracking-tight text-[#111110] leading-tight mb-6">Common Questions</h2>
+        <p class="text-base text-[#78716C] leading-relaxed max-w-[44ch] mb-10">Still have questions? Call us directly — we pick up the phone.</p>
+        <a href="tel:+13128471928" class="btn-dark inline-flex items-center gap-2 font-outfit font-semibold text-sm px-6 py-3.5 rounded-full">+1 (312) 847-1928</a>
+      </div>
+      <div class="fade-up d1 divide-y divide-[#E7E5E4]">
+        <div class="faq-item py-5">
+          <button class="faq-btn w-full flex items-start justify-between gap-4 text-left group" onclick="toggleFAQ(this)">
+            <span class="faq-q font-outfit font-semibold text-base leading-snug text-[#111110] transition-colors">Do you provide free estimates?</span>
+            <span class="shrink-0 mt-0.5 text-[#78716C]"><i class="ph ph-plus faq-icon-plus" style="font-size:18px;"></i><i class="ph ph-minus faq-icon-minus" style="font-size:18px;"></i></span>
+          </button>
+          <div class="faq-body"><p class="text-sm text-[#78716C] leading-relaxed pt-3 max-w-[60ch]">Yes — all estimates are free, no-obligation, and on-site. We assess the job in person before quoting so there are no surprises on install day.</p></div>
+        </div>
+        <div class="faq-item py-5">
+          <button class="faq-btn w-full flex items-start justify-between gap-4 text-left group" onclick="toggleFAQ(this)">
+            <span class="faq-q font-outfit font-semibold text-base leading-snug text-[#111110] transition-colors">How long does a typical window installation take?</span>
+            <span class="shrink-0 mt-0.5 text-[#78716C]"><i class="ph ph-plus faq-icon-plus" style="font-size:18px;"></i><i class="ph ph-minus faq-icon-minus" style="font-size:18px;"></i></span>
+          </button>
+          <div class="faq-body"><p class="text-sm text-[#78716C] leading-relaxed pt-3 max-w-[60ch]">Most single-window jobs take 1–2 hours. A full-home replacement of 10–15 windows is typically done in a single day by our two-person crew.</p></div>
+        </div>
+        <div class="faq-item py-5">
+          <button class="faq-btn w-full flex items-start justify-between gap-4 text-left group" onclick="toggleFAQ(this)">
+            <span class="faq-q font-outfit font-semibold text-base leading-snug text-[#111110] transition-colors">Are you licensed and insured?</span>
+            <span class="shrink-0 mt-0.5 text-[#78716C]"><i class="ph ph-plus faq-icon-plus" style="font-size:18px;"></i><i class="ph ph-minus faq-icon-minus" style="font-size:18px;"></i></span>
+          </button>
+          <div class="faq-body"><p class="text-sm text-[#78716C] leading-relaxed pt-3 max-w-[60ch]">Yes. AA Windows & Doors is fully licensed in Illinois and carries general liability and workers' compensation insurance. Documentation available on request.</p></div>
+        </div>
+        <div class="faq-item py-5">
+          <button class="faq-btn w-full flex items-start justify-between gap-4 text-left group" onclick="toggleFAQ(this)">
+            <span class="faq-q font-outfit font-semibold text-base leading-snug text-[#111110] transition-colors">What window brands do you carry?</span>
+            <span class="shrink-0 mt-0.5 text-[#78716C]"><i class="ph ph-plus faq-icon-plus" style="font-size:18px;"></i><i class="ph ph-minus faq-icon-minus" style="font-size:18px;"></i></span>
+          </button>
+          <div class="faq-body"><p class="text-sm text-[#78716C] leading-relaxed pt-3 max-w-[60ch]">We work with Andersen, Pella, Marvin, and regional manufacturers depending on the project's scope, style, and budget. We'll recommend the right fit for your home.</p></div>
+        </div>
+        <div class="faq-item py-5">
+          <button class="faq-btn w-full flex items-start justify-between gap-4 text-left group" onclick="toggleFAQ(this)">
+            <span class="faq-q font-outfit font-semibold text-base leading-snug text-[#111110] transition-colors">Do you offer a warranty on your work?</span>
+            <span class="shrink-0 mt-0.5 text-[#78716C]"><i class="ph ph-plus faq-icon-plus" style="font-size:18px;"></i><i class="ph ph-minus faq-icon-minus" style="font-size:18px;"></i></span>
+          </button>
+          <div class="faq-body"><p class="text-sm text-[#78716C] leading-relaxed pt-3 max-w-[60ch]">We back all installations with a 2-year labor warranty, plus the manufacturer warranty on the unit itself — typically 10 years to lifetime coverage.</p></div>
+        </div>
+        <div class="faq-item py-5">
+          <button class="faq-btn w-full flex items-start justify-between gap-4 text-left group" onclick="toggleFAQ(this)">
+            <span class="faq-q font-outfit font-semibold text-base leading-snug text-[#111110] transition-colors">Can you match windows in a historic home?</span>
+            <span class="shrink-0 mt-0.5 text-[#78716C]"><i class="ph ph-plus faq-icon-plus" style="font-size:18px;"></i><i class="ph ph-minus faq-icon-minus" style="font-size:18px;"></i></span>
+          </button>
+          <div class="faq-body"><p class="text-sm text-[#78716C] leading-relaxed pt-3 max-w-[60ch]">Often, yes. We source custom-profile windows to match original molding and dimensions in pre-war and historic homes. Bring us photos and we can usually find a match.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="relative bg-[#111110] py-24 lg:py-32 overflow-hidden">
+  <div class="absolute inset-0 z-0">
+    <img src="https://picsum.photos/seed/cta_bg_windows/1600/900" alt="" class="w-full h-full object-cover opacity-20" aria-hidden="true" />
+    <div class="absolute inset-0" style="background:linear-gradient(to right,#111110 40%,rgba(17,17,16,0.7))"></div>
+  </div>
+  <div class="absolute top-1/2 right-1/4 -translate-y-1/2 w-[500px] h-[500px] rounded-full pointer-events-none" style="background:rgba(180,83,9,0.08);filter:blur(120px);"></div>
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="cta-grid">
+      <div class="fade-up">
+        <p class="font-outfit text-xs font-semibold text-amber-500 uppercase tracking-widest mb-4">Ready to Start?</p>
+        <h2 class="font-outfit font-extrabold text-4xl md:text-6xl tracking-tight text-[#F8F7F4] leading-[1.05] mb-6">Your Home Deserves Frames Built Right.</h2>
+        <p class="text-base text-stone-400 leading-relaxed max-w-[50ch] mb-10">Get a free, no-pressure estimate. We measure carefully, show up on time, and leave your space cleaner than we found it.</p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#faq" class="btn-amber group flex items-center gap-2 font-outfit font-semibold text-sm px-6 py-4 rounded-full">
+            Get Free Estimate <i class="ph ph-arrow-right"></i>
+          </a>
+          <a href="tel:+13128471928" class="flex items-center gap-2 border border-stone-700 hover:border-stone-500 text-stone-300 hover:text-[#F8F7F4] font-outfit font-semibold text-sm px-6 py-4 rounded-full transition-all">
+            <i class="ph ph-phone-call"></i> Call Us Now
+          </a>
+        </div>
+      </div>
+      <div class="fade-up d2 border border-white/10 rounded-2xl p-8" style="background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);box-shadow:inset 0 1px 0 rgba(255,255,255,0.08);">
+        <p class="font-outfit font-bold text-sm text-amber-500 mb-6 uppercase tracking-wider">Contact</p>
+        <div class="flex flex-col gap-5">
+          <div class="border-b border-white/8 pb-5">
+            <p class="text-xs text-stone-500 mb-1">Phone</p>
+            <a href="tel:+13128471928" class="font-outfit font-semibold text-base text-[#F8F7F4] hover:text-amber-400 transition-colors">+1 (312) 847-1928</a>
+          </div>
+          <div class="border-b border-white/8 pb-5">
+            <p class="text-xs text-stone-500 mb-1">Email</p>
+            <a href="mailto:estimates@aawindowsdoors.com" class="font-outfit font-semibold text-base text-[#F8F7F4] hover:text-amber-400 transition-colors">estimates@aawindowsdoors.com</a>
+          </div>
+          <div class="border-b border-white/8 pb-5">
+            <p class="text-xs text-stone-500 mb-1">Service Area</p>
+            <p class="font-outfit font-semibold text-base text-[#F8F7F4]">Chicago & Chicagoland</p>
+          </div>
+          <div>
+            <p class="text-xs text-stone-500 mb-2">Hours</p>
+            <p class="text-sm text-stone-300">Mon–Fri: 7am–6pm</p>
+            <p class="text-sm text-stone-300">Sat: 8am–2pm</p>
+            <p class="text-sm text-amber-600 mt-1">Emergency: 24/7</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-[#0D0D0C] border-t border-stone-900">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+    <div class="footer-grid mb-14">
+      <div>
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-9 h-9 bg-amber-700 flex items-center justify-center rounded-[6px]">
+            <span class="font-outfit font-bold text-white text-sm">AA</span>
+          </div>
+          <div>
+            <p class="font-outfit font-semibold text-[13px] text-stone-100 leading-none">AA Windows & Doors</p>
+            <p class="text-[11px] text-stone-500 leading-none mt-[3px]">Installs & Repairs</p>
+          </div>
+        </div>
+        <p class="text-sm text-stone-500 leading-relaxed max-w-[32ch]">Built on craftsmanship, backed by two decades of trust across Chicagoland.</p>
+      </div>
+      <div>
+        <p class="font-outfit font-semibold text-xs text-stone-400 uppercase tracking-widest mb-5">Navigation</p>
+        <ul class="flex flex-col gap-3">
+          <li><a href="#services" class="text-sm text-stone-500 hover:text-stone-200 transition-colors">Services</a></li>
+          <li><a href="#projects" class="text-sm text-stone-500 hover:text-stone-200 transition-colors">Projects</a></li>
+          <li><a href="#process" class="text-sm text-stone-500 hover:text-stone-200 transition-colors">Process</a></li>
+          <li><a href="#faq" class="text-sm text-stone-500 hover:text-stone-200 transition-colors">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-outfit font-semibold text-xs text-stone-400 uppercase tracking-widest mb-5">Services</p>
+        <ul class="flex flex-col gap-3">
+          <li><a href="#services" class="text-sm text-stone-500 hover:text-stone-200 transition-colors">Window Installation</a></li>
+          <li><a href="#services" class="text-sm text-stone-500 hover:text-stone-200 transition-colors">Door Installation</a></li>
+          <li><a href="#services" class="text-sm text-stone-500 hover:text-stone-200 transition-colors">Window Repair</a></li>
+          <li><a href="#services" class="text-sm text-stone-500 hover:text-stone-200 transition-colors">Door Repair</a></li>
+          <li><a href="#services" class="text-sm text-stone-500 hover:text-stone-200 transition-colors">Emergency Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-outfit font-semibold text-xs text-stone-400 uppercase tracking-widest mb-5">Contact</p>
+        <ul class="flex flex-col gap-4">
+          <li><a href="tel:+13128471928" class="flex items-start gap-2.5 text-sm text-stone-500 hover:text-stone-200 transition-colors"><i class="ph ph-phone-call text-amber-700 mt-0.5" style="font-size:14px;flex-shrink:0;"></i>+1 (312) 847-1928</a></li>
+          <li><a href="mailto:estimates@aawindowsdoors.com" class="flex items-start gap-2.5 text-sm text-stone-500 hover:text-stone-200 transition-colors"><i class="ph ph-envelope-simple text-amber-700 mt-0.5" style="font-size:14px;flex-shrink:0;"></i>estimates@aawindowsdoors.com</a></li>
+          <li><div class="flex items-start gap-2.5"><i class="ph ph-map-pin text-amber-700 mt-0.5" style="font-size:14px;flex-shrink:0;"></i><span class="text-sm text-stone-500">Chicago & Chicagoland, IL</span></div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-stone-900 pt-8 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-xs text-stone-600">&copy; 2026 AA Windows & Doors. All rights reserved.</p>
+      <p class="text-xs text-stone-700">Licensed &amp; Insured · Illinois Contractor</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('nav-scrolled', window.scrollY > 30);
+  }, { passive: true });
+
+  // Mobile menu
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('menu-icon-open');
+  const iconClose = document.getElementById('menu-icon-close');
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+    iconOpen.classList.toggle('hidden');
+    iconClose.classList.toggle('hidden');
+  });
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    iconOpen.classList.remove('hidden');
+    iconClose.classList.add('hidden');
+  }
+
+  // FAQ accordion
+  function toggleFAQ(btn) {
+    const item = btn.closest('.faq-item');
+    const body = item.querySelector('.faq-body');
+    const isOpen = item.classList.contains('faq-open');
+    // close all
+    document.querySelectorAll('.faq-item').forEach(el => {
+      el.classList.remove('faq-open');
+      el.querySelector('.faq-body').classList.remove('open');
+    });
+    if (!isOpen) {
+      item.classList.add('faq-open');
+      body.classList.add('open');
+    }
+  }
+
+  // Scroll-triggered fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
