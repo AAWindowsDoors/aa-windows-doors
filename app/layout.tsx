@@ -155,6 +155,17 @@ const jsonLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${outfit.variable} ${dmSans.variable}`}>
+      <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-J8M9JDNZQ6" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-J8M9JDNZQ6');`,
+          }}
+        />
+      </head>
       <body className="bg-aa-white text-aa-black antialiased">
         {children}
         <script
