@@ -67,7 +67,7 @@ export default function GallopSuttonPage() {
 
       {/* Hero — Double Spread */}
       <div className="grid grid-cols-1 sm:grid-cols-[60%_40%] h-[55vw] min-h-[340px] max-h-[680px]">
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden h-full">
           <Image
             src="/images/sutton-gallop-hero.jpeg"
             alt="Full front elevation of The Gallop, Sutton — bespoke gable window, casement windows and 6m aluminium sliding door by AA Windows & Doors"
@@ -77,7 +77,7 @@ export default function GallopSuttonPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-transparent to-aa-black/20" />
         </div>
-        <div className="relative overflow-hidden hidden sm:block border-l-2 border-yellow-400">
+        <div className="relative overflow-hidden hidden sm:block border-l-2 border-yellow-400 h-full">
           <Image
             src="/images/sutton-gallop-van-front.jpeg"
             alt="AA Windows & Doors branded van parked outside completed project — The Gallop, Sutton"
