@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight, ArrowRight, CheckCircle, MapPin } from '@phosphor-icons/react/dist/ssr'
+import { ArrowUpRight, ArrowRight, CheckCircle, MapPin, InstagramLogo, House } from '@phosphor-icons/react/dist/ssr'
 import PageShell from '@/components/PageShell'
 
 export const metadata: Metadata = {
@@ -108,13 +108,48 @@ export default function ProjectsPage() {
         <div className="absolute inset-0 opacity-[0.03]"
           style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.3) 40px, rgba(255,255,255,0.3) 41px), repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.3) 40px, rgba(255,255,255,0.3) 41px)' }} />
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
-          <p className="font-outfit text-xs font-semibold text-yellow-400 uppercase tracking-widest mb-4">Our Work</p>
-          <h1 className="font-outfit font-extrabold text-4xl md:text-5xl lg:text-6xl tracking-tight leading-[1.05] mb-6 max-w-3xl">
-            Every Project.<br /><span className="text-yellow-400">No Exceptions.</span>
-          </h1>
-          <p className="font-sans text-lg text-stone-400 leading-relaxed max-w-[52ch]">
-            A full archive of our installations across London and Surrey. Surveyed, supplied and fitted by our own team — no subcontractors, no shortcuts.
-          </p>
+
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-2 text-stone-500 text-xs font-sans mb-8">
+            <Link href="/" className="hover:text-yellow-400 transition-colors flex items-center gap-1">
+              <House size={11} weight="bold" /> Home
+            </Link>
+            <span>/</span>
+            <span className="text-stone-400">Projects</span>
+          </div>
+
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+            <div>
+              <p className="font-outfit text-xs font-semibold text-yellow-400 uppercase tracking-widest mb-4">Our Work</p>
+              <h1 className="font-outfit font-extrabold text-4xl md:text-5xl lg:text-6xl tracking-tight leading-[1.05] mb-6 max-w-3xl">
+                Every Project.<br /><span className="text-yellow-400">No Exceptions.</span>
+              </h1>
+              <p className="font-sans text-base text-stone-400 leading-relaxed max-w-[52ch]">
+                A full archive of our installations across London and Surrey. Surveyed, supplied and fitted by our own team — no subcontractors, no shortcuts.
+              </p>
+            </div>
+
+            {/* Stats + Instagram */}
+            <div className="flex flex-col gap-3 shrink-0">
+              <div className="grid grid-cols-3 gap-3">
+                {[
+                  { value: '9+', label: 'Case Studies' },
+                  { value: '122', label: 'Reviews' },
+                  { value: '10/10', label: 'Checkatrade' },
+                ].map(s => (
+                  <div key={s.label} className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center">
+                    <p className="font-outfit font-extrabold text-xl text-yellow-400 leading-none mb-1">{s.value}</p>
+                    <p className="font-sans text-[11px] text-stone-500 leading-tight">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+              <a href="https://www.instagram.com/_aa_windows_doors" target="_blank" rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 border border-white/15 bg-white/5 hover:bg-white/10 hover:border-yellow-400/40 text-stone-400 hover:text-white font-outfit font-semibold text-sm px-5 py-3 rounded-full transition-all duration-300">
+                <InstagramLogo size={15} weight="bold" />
+                Follow @_aa_windows_doors
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 

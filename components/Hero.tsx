@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import { ArrowRight, ShieldCheck, Star, Clock, Certificate } from '@phosphor-icons/react'
+import { ArrowRight, ShieldCheck, Star, Clock, Certificate, InstagramLogo } from '@phosphor-icons/react'
 
 const trustBadges = [
   { icon: ShieldCheck, label: 'Checkatrade Verified' },
@@ -83,6 +83,11 @@ export default function Hero() {
             <a href="#projects"
               className="flex items-center gap-2 border border-white/40 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-outfit font-semibold text-sm px-6 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-[1px] active:scale-[0.98]">
               View Our Work
+            </a>
+            <a href="https://www.instagram.com/_aa_windows_doors" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-2 border border-white/20 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-white/40 text-white/70 hover:text-white font-outfit font-semibold text-sm px-4 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-[1px]">
+              <InstagramLogo size={16} weight="bold" />
+              @_aa_windows_doors
             </a>
           </motion.div>
         </div>
