@@ -101,10 +101,10 @@ export default function Hero() {
               View Our Work
             </a>
             <a href="https://www.instagram.com/_aa_windows_doors" target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2 font-outfit font-bold text-sm text-white px-4 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-[1px] hover:opacity-90 active:scale-[0.98]"
+              aria-label="AA Windows & Doors on Instagram"
+              className="flex items-center justify-center w-[50px] h-[50px] rounded-full transition-all duration-300 hover:scale-105 hover:shadow-[0_4px_20px_rgba(214,36,159,0.5)] active:scale-[0.97]"
               style={{ background: 'radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 20%, #d6249f 50%, #285AEB 90%)' }}>
-              <InstagramGradientIcon size={16} />
-              @_aa_windows_doors
+              <InstagramGradientIcon size={22} />
             </a>
           </motion.div>
         </div>
