@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight, ArrowRight, CheckCircle, MapPin, House } from '@phosphor-icons/react/dist/ssr'
+import { ArrowUpRight, ArrowRight, CheckCircle, MapPin, House, Star } from '@phosphor-icons/react/dist/ssr'
 
 function InstagramGradientIcon({ size = 15 }: { size?: number }) {
   return (
@@ -147,7 +147,7 @@ export default function ProjectsPage() {
                 ].map(s => (
                   <div key={s.label} className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center">
                     <p className="font-outfit font-extrabold text-xl text-yellow-400 leading-none mb-1">{s.value}</p>
-                    <p className="font-sans text-[11px] text-stone-500 leading-tight">{s.label}</p>
+                    <p className="font-sans text-xs text-stone-500 leading-tight">{s.label}</p>
                   </div>
                 ))}
               </div>
@@ -165,7 +165,7 @@ export default function ProjectsPage() {
       {/* Featured Project */}
       <div className="bg-stone-950 py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <p className="font-outfit text-xs font-semibold text-yellow-400 uppercase tracking-widest mb-6">★ Featured Project</p>
+          <p className="font-outfit text-xs font-semibold text-yellow-400 uppercase tracking-widest mb-6 flex items-center gap-1.5"><Star size={12} weight="fill" /> Featured Project</p>
           <Link href="/projects/gallop-sutton-windows" className="group block">
             <div className="relative rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-[38%_22%_40%] h-[400px] lg:h-[520px] border border-white/10 hover:border-yellow-400/40 transition-colors duration-500">
 
@@ -212,8 +212,11 @@ export default function ProjectsPage() {
                     </div>
                   ))}
                 </div>
-                <div className="flex items-center gap-2 font-outfit font-semibold text-sm text-yellow-400 group-hover:text-yellow-300 transition-colors">
-                  View full case study <ArrowRight size={14} weight="bold" className="transition-transform group-hover:translate-x-1" />
+                <div>
+                  <span className="inline-flex items-center gap-2 bg-yellow-400/10 border border-yellow-400/30 group-hover:bg-yellow-400 group-hover:border-yellow-400 font-outfit font-semibold text-sm text-yellow-400 group-hover:text-black px-4 py-2.5 rounded-full transition-all duration-300">
+                    View full case study
+                    <ArrowRight size={14} weight="bold" className="transition-transform group-hover:translate-x-0.5" />
+                  </span>
                 </div>
               </div>
             </div>

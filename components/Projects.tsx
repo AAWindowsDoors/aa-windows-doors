@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowUpRight, CheckCircle, ArrowRight } from '@phosphor-icons/react'
+import { ArrowUpRight, CheckCircle, ArrowRight, Star } from '@phosphor-icons/react'
 
 function InstagramGradientIcon({ size = 15 }: { size?: number }) {
   return (
@@ -101,7 +101,7 @@ export default function Projects() {
           initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-4"
+          className="mb-6"
         >
           <Link href="/projects/gallop-sutton-windows" className="group block">
             <div className="relative rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-[38%_22%_40%] h-[420px] lg:h-[540px] border border-white/10 hover:border-yellow-400/40 transition-colors duration-500">
@@ -118,7 +118,7 @@ export default function Projects() {
                 {/* Featured badge */}
                 <div className="absolute top-5 left-5 z-10">
                   <span className="inline-flex items-center gap-1.5 bg-yellow-400 font-outfit font-bold text-xs text-black px-3 py-1.5 rounded-full shadow-lg">
-                    ★ Featured Project
+                    <Star size={11} weight="fill" /> Featured Project
                   </span>
                 </div>
               </div>
@@ -166,9 +166,11 @@ export default function Projects() {
                 </div>
 
                 {/* CTA */}
-                <div className="flex items-center gap-2 font-outfit font-semibold text-sm text-yellow-400 group-hover:text-yellow-300 transition-colors">
-                  View full case study
-                  <ArrowRight size={15} weight="bold" className="transition-transform group-hover:translate-x-1" />
+                <div>
+                  <span className="inline-flex items-center gap-2 bg-yellow-400/10 border border-yellow-400/30 group-hover:bg-yellow-400 group-hover:border-yellow-400 font-outfit font-semibold text-sm text-yellow-400 group-hover:text-black px-4 py-2.5 rounded-full transition-all duration-300">
+                    View full case study
+                    <ArrowRight size={14} weight="bold" className="transition-transform group-hover:translate-x-0.5" />
+                  </span>
                 </div>
               </div>
             </div>
@@ -176,7 +178,7 @@ export default function Projects() {
         </motion.div>
 
         {/* Supporting Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {supporting.map((project, i) => (
             <motion.div
               key={project.title}
@@ -193,7 +195,7 @@ export default function Projects() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 group-hover:opacity-90" />
                 <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <p className="font-sans text-[11px] text-yellow-400 mb-1 uppercase tracking-widest font-semibold">{project.location}</p>
+                  <p className="font-outfit text-xs text-yellow-400 mb-1 uppercase tracking-widest font-semibold">{project.location}</p>
                   <h3 className="font-outfit font-bold text-base text-white leading-tight mb-0.5">{project.title}</h3>
                   <p className="font-sans text-xs text-stone-400">{project.type}</p>
                 </div>
@@ -210,12 +212,12 @@ export default function Projects() {
           initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-between gap-6 mt-12 pt-10 border-t border-white/10"
+          className="flex flex-col items-center gap-6 mt-12 pt-10 border-t border-white/10 text-center"
         >
-          <p className="font-sans text-sm text-stone-500 text-center sm:text-left">
+          <p className="font-sans text-sm text-stone-500">
             Every project surveyed, supplied and fitted by our own team — no subcontractors.
           </p>
-          <div className="flex gap-3 flex-wrap justify-center">
+          <div className="flex flex-wrap gap-3 justify-center">
             <Link href="/projects"
               className="inline-flex items-center gap-2 border border-white/20 hover:border-yellow-400/50 text-stone-300 hover:text-yellow-400 font-outfit font-semibold text-sm px-5 py-3 rounded-full transition-all duration-300">
               All Projects <ArrowUpRight size={14} weight="bold" />

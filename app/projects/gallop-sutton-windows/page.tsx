@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, ArrowRight, MapPin, Wrench, CheckCircle } from '@phosphor-icons/react/dist/ssr'
+import { ArrowLeft, ArrowRight, MapPin, Wrench, CheckCircle, Star } from '@phosphor-icons/react/dist/ssr'
 import PageShell from '@/components/PageShell'
 
 export const metadata: Metadata = {
@@ -88,7 +88,7 @@ export default function GallopSuttonPage() {
           <div className="absolute inset-0 bg-gradient-to-l from-transparent to-aa-black/10" />
           <div className="absolute bottom-5 left-5">
             <span className="inline-flex items-center gap-1.5 bg-yellow-400 font-outfit font-bold text-xs text-black px-3 py-1.5 rounded-full shadow-lg">
-              ★ Featured Project
+              <Star size={11} weight="fill" /> Featured Project
             </span>
           </div>
         </div>
