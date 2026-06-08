@@ -65,7 +65,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.75,
     },
-    // Project case studies
+    // Projects index + case studies
+    {
+      url: `${siteUrl}/projects`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${siteUrl}/projects/gallop-sutton-windows`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.8,
+    },
     {
       url: `${siteUrl}/projects/sm3-roof-lantern`,
       lastModified: new Date(),

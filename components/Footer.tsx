@@ -5,8 +5,8 @@ import { AALogo } from './AALogo'
 const navLinks = [
   { label: 'Services', href: '/#services' },
   { label: 'Projects', href: '/#projects' },
-  { label: 'Process', href: '/#process' },
-  { label: 'FAQ', href: '/#contact' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 const services = [

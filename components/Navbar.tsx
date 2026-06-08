@@ -15,7 +15,12 @@ export default function Navbar({ dark = false }: { dark?: boolean }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const links = ['Services', 'Projects', 'Process', 'Contact']
+  const navLinks = [
+    { label: 'Services', href: '/#services' },
+    { label: 'Projects', href: '/projects' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+  ]
 
   return (
     <nav
@@ -39,8 +44,8 @@ export default function Navbar({ dark = false }: { dark?: boolean }) {
         </a>
 
         <div className="hidden md:flex items-center gap-8">
-          {links.map((item) => (
-            <a key={item} href={`/#${item.toLowerCase()}`}
+          {navLinks.map((link) => (
+            <a key={link.label} href={link.href}
               className={`font-sans text-sm transition-colors duration-200 ${
                 dark
                   ? 'text-yellow-400 hover:text-yellow-300'
@@ -48,7 +53,7 @@ export default function Navbar({ dark = false }: { dark?: boolean }) {
                     ? 'text-aa-stone hover:text-aa-black'
                     : 'text-white/90 hover:text-white'
               }`}>
-              {item}
+              {link.label}
             </a>
           ))}
         </div>
@@ -106,9 +111,9 @@ export default function Navbar({ dark = false }: { dark?: boolean }) {
             className={`md:hidden overflow-hidden ${dark ? 'bg-aa-black border-t border-stone-800' : 'bg-white border-t border-aa-border shadow-lg'}`}
           >
             <div className="px-6 py-6 flex flex-col gap-5">
-              {links.map((item) => (
-                <a key={item} href={`/#${item.toLowerCase()}`} onClick={() => setMenuOpen(false)}
-                  className={`font-outfit font-semibold text-base ${dark ? 'text-yellow-400' : 'text-aa-black'}`}>{item}</a>
+              {navLinks.map((link) => (
+                <a key={link.label} href={link.href} onClick={() => setMenuOpen(false)}
+                  className={`font-outfit font-semibold text-base ${dark ? 'text-yellow-400' : 'text-aa-black'}`}>{link.label}</a>
               ))}
               <div className={`pt-2 border-t flex flex-col gap-3 ${dark ? 'border-stone-800' : 'border-aa-border'}`}>
                 <a href="tel:+447585586388" className={`flex items-center gap-2 font-outfit font-semibold text-sm ${dark ? 'text-yellow-400' : 'text-aa-black'}`}>
