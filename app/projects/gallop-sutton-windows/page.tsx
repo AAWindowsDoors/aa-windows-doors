@@ -66,7 +66,7 @@ export default function GallopSuttonPage() {
       </div>
 
       {/* Hero — Double Spread */}
-      <div className="grid grid-cols-1 sm:grid-cols-[60%_40%] h-[55vw] min-h-[340px] max-h-[680px]">
+      <div className="grid grid-cols-1 sm:grid-cols-[60%_40%] h-[380px] sm:h-[480px] lg:h-[600px]">
         <div className="relative overflow-hidden h-full">
           <Image
             src="/images/sutton-gallop-hero.jpeg"

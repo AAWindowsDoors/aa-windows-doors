@@ -96,10 +96,10 @@ export default function Projects() {
           className="mb-4"
         >
           <Link href="/projects/gallop-sutton-windows" className="group block">
-            <div className="relative rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-[38%_22%_40%] min-h-[480px] lg:min-h-[540px] border border-white/10 hover:border-yellow-400/40 transition-colors duration-500">
+            <div className="relative rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-[38%_22%_40%] h-[420px] lg:h-[540px] border border-white/10 hover:border-yellow-400/40 transition-colors duration-500">
 
               {/* Architecture photo */}
-              <div className="relative overflow-hidden min-h-[280px] lg:min-h-0">
+              <div className="relative overflow-hidden h-full">
                 <Image
                   src="/images/sutton-gallop-hero.jpeg"
                   alt="Full front elevation of The Gallop, Sutton — bespoke gable window and 6m sliding door"
@@ -113,11 +113,10 @@ export default function Projects() {
                     ★ Featured Project
                   </span>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-aa-black/50 via-transparent to-transparent lg:hidden" />
               </div>
 
               {/* Van / brand photo */}
-              <div className="relative overflow-hidden hidden lg:block border-l-2 border-yellow-400">
+              <div className="relative overflow-hidden hidden lg:block h-full border-l-2 border-yellow-400">
                 <Image
                   src="/images/sutton-gallop-van-front.jpeg"
                   alt="AA Windows & Doors branded van parked outside The Gallop, Sutton"

@@ -123,10 +123,10 @@ export default function ProjectsPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <p className="font-outfit text-xs font-semibold text-yellow-400 uppercase tracking-widest mb-6">★ Featured Project</p>
           <Link href="/projects/gallop-sutton-windows" className="group block">
-            <div className="relative rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-[38%_22%_40%] min-h-[460px] lg:min-h-[520px] border border-white/10 hover:border-yellow-400/40 transition-colors duration-500">
+            <div className="relative rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-[38%_22%_40%] h-[400px] lg:h-[520px] border border-white/10 hover:border-yellow-400/40 transition-colors duration-500">
 
               {/* Architecture photo */}
-              <div className="relative overflow-hidden min-h-[280px] lg:min-h-0">
+              <div className="relative overflow-hidden h-full">
                 <Image
                   src="/images/sutton-gallop-hero.jpeg"
                   alt="Full front elevation of The Gallop, Sutton — bespoke gable window and 6m sliding door by AA Windows & Doors"
@@ -134,11 +134,10 @@ export default function ProjectsPage() {
                   className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/50 via-transparent to-transparent lg:hidden" />
               </div>
 
               {/* Van / brand photo */}
-              <div className="relative overflow-hidden hidden lg:block border-l-2 border-yellow-400">
+              <div className="relative overflow-hidden hidden lg:block h-full border-l-2 border-yellow-400">
                 <Image
                   src="/images/sutton-gallop-van-front.jpeg"
                   alt="AA Windows & Doors branded van parked outside The Gallop, Sutton"
