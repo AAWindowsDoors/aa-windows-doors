@@ -106,6 +106,42 @@ const allProjects = [
     imgAlt: 'Commercial uPVC windows and door supply and installation Sutton Surrey',
     href: '/projects/commercial-upvc-unit',
   },
+  {
+    title: 'London — Sash Windows',
+    type: 'uPVC Sash · Full Package',
+    detail: 'Full sash window replacement throughout a Victorian terrace — all rooms including frosted bathroom pane.',
+    location: 'London',
+    img: '/images/project-sash-sw-van.jpeg',
+    imgAlt: 'New white uPVC sash windows installed at Victorian terrace London — AA van outside',
+    href: '/projects/london-sash-windows',
+  },
+  {
+    title: 'SW17 — Door Unit',
+    type: 'Double Laminated Unit',
+    detail: 'Wired glass panel replaced with a double laminated safety unit in a Victorian red front door, Tooting.',
+    location: 'Tooting · SW17',
+    img: '/images/project-tooting-door-unit.jpeg',
+    imgAlt: 'Double laminated unit installed in red Victorian front door Tooting SW17 London',
+    href: '/projects/sw17-door-unit',
+  },
+  {
+    title: 'London — Flat Roof Skylights',
+    type: 'Aluminium Skylights · Flat Roof',
+    detail: 'Two thermally broken aluminium skylights installed on a central London flat roof — lead-dressed upstands.',
+    location: 'Central London',
+    img: '/images/project-skylights-flatroof.jpeg',
+    imgAlt: 'Two aluminium flat roof skylights installed on a London flat roof property',
+    href: '/projects/london-skylights',
+  },
+  {
+    title: 'London — Conservatory Re-Glaze',
+    type: 'Conservatory Glazing · Emergency',
+    detail: 'Emergency response to stress-fractured roof panels — full re-glaze with new laminated safety glass.',
+    location: 'London',
+    img: '/images/project-conservatory-after.jpeg',
+    imgAlt: 'New laminated glass conservatory roof installation London — emergency re-glaze',
+    href: '/projects/conservatory-glazing',
+  },
 ]
 
 export default function ProjectsPage() {

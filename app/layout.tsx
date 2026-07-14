@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Outfit, DM_Sans } from 'next/font/google'
 import './globals.css'
+import WhatsAppButton from '@/components/WhatsAppButton'
 
 const outfit = Outfit({
   subsets: ['latin'],
@@ -168,6 +169,7 @@ gtag('config', 'G-J8M9JDNZQ6');`,
       </head>
       <body className="bg-aa-white text-aa-black antialiased">
         {children}
+        <WhatsAppButton />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -132,5 +132,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.7,
     },
+    {
+      url: `${siteUrl}/projects/london-sash-windows`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.75,
+    },
+    {
+      url: `${siteUrl}/projects/sw17-door-unit`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.7,
+    },
+    {
+      url: `${siteUrl}/projects/london-skylights`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.75,
+    },
+    {
+      url: `${siteUrl}/projects/conservatory-glazing`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.75,
+    },
   ]
 }
