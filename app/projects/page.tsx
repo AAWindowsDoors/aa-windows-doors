@@ -177,7 +177,7 @@ export default function ProjectsPage() {
             <div className="flex flex-col gap-3 shrink-0">
               <div className="grid grid-cols-3 gap-3">
                 {[
-                  { value: '9+', label: 'Case Studies' },
+                  { value: '14', label: 'Case Studies' },
                   { value: '122', label: 'Reviews' },
                   { value: '10/10', label: 'Checkatrade' },
                 ].map(s => (

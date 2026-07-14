@@ -50,7 +50,7 @@ export default function SW17DoorUnitPage() {
           src="/images/project-tooting-door-unit.jpeg"
           alt="Before and after: double laminated unit installed in red Victorian front door, Tooting SW17"
           fill
-          className="object-cover object-top"
+          className="object-cover object-center"
           priority
         />
       </div>

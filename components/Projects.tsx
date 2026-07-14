@@ -22,6 +22,38 @@ const featuredScope = [
 
 const supporting = [
   {
+    title: 'London — Sash Windows',
+    type: 'uPVC Sash · Full Package',
+    location: 'London',
+    img: '/images/project-sash-sw-van.jpeg',
+    imgAlt: 'New sash window installation with AA Windows & Doors van outside, London Victorian terrace',
+    href: '/projects/london-sash-windows',
+  },
+  {
+    title: 'London — Conservatory Re-Glaze',
+    type: 'Conservatory Glazing · Emergency',
+    location: 'London',
+    img: '/images/project-conservatory-after.jpeg',
+    imgAlt: 'New laminated safety glass panels installed on conservatory roof, London',
+    href: '/projects/conservatory-glazing',
+  },
+  {
+    title: 'London — Flat Roof Skylights',
+    type: 'Aluminium Skylights · Flat Roof',
+    location: 'Central London',
+    img: '/images/project-skylights-flatroof.jpeg',
+    imgAlt: 'Two aluminium flat roof skylights installed on a central London felt roof',
+    href: '/projects/london-skylights',
+  },
+  {
+    title: 'SW17 — Door Unit',
+    type: 'Double Laminated Unit',
+    location: 'Tooting, London',
+    img: '/images/project-tooting-door-unit.jpeg',
+    imgAlt: 'Before and after: double laminated safety unit fitted to red Victorian front door, Tooting SW17',
+    href: '/projects/sw17-door-unit',
+  },
+  {
     title: 'SM3 — Roof Lanterns',
     type: 'Glazing · Roof Lanterns',
     location: 'Cheam, Sutton',
@@ -61,14 +93,6 @@ const supporting = [
     img: '/images/project-timber-door-se24.jpg',
     imgAlt: 'Sage green solid timber front door SE24 Herne Hill London',
     href: '/projects/se24-timber-door',
-  },
-  {
-    title: 'SE26 — Fire Door',
-    type: 'FD30 Fire Door · Flat',
-    location: 'Sydenham, London',
-    img: '/images/project-fire-door-se26.jpg',
-    imgAlt: 'FD30 oak veneer fire door installed SE26 Sydenham London',
-    href: '/projects/se26-fire-door',
   },
 ]
 
